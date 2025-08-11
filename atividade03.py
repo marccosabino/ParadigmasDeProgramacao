@@ -12,6 +12,27 @@ class Livro:
     def __str__(self):
         return f'"{self.__titulo}" por {self.__autor}'
 
+class LivroDigital(Livro): 
+    def __init__(self, titulo, autor, formato):
+        super().__init__(titulo, autor)
+        self.__formato = formato
+
+    def get_formato(self):
+        return self.__formato
+    
+    def __str__(self):
+        return f'"{self.get_titulo()}" por {self.get_autor()} (Formato: {self.__formato})'
+    
+class LivroFisico(Livro):
+    def __init__(self, titulo, autor, num_paginas):
+        super().__init__(titulo, autor)
+        self.__num_paginas = num_paginas
+
+    def get_num_paginas(self):
+        return self.__num_paginas
+
+    def __str__(self):
+        return f'"{self.get_titulo()}" por {self.get_autor()} ({self.__num_paginas} páginas)'
 
 class Biblioteca:
     def __init__(self):
@@ -47,28 +68,19 @@ class Biblioteca:
         return resultado
 
 #TESTE
-meuLivro = Livro("Harry Potter", "J. K. Rowling")
-livro1 = Livro("O Hobbit", "J.R.R. Tolkien")
-livro2 = Livro("Morte no Nilo", "Agatha Christie")
-
-# Exibindo livro individual
-print("Título:", meuLivro.get_titulo())
-print("Autor:", meuLivro.get_autor())
+# Criando diferentes tipos de livros
+livro1 = LivroFisico("Dom Casmurro", "Machado de Assis", 220)
+livro2 = LivroDigital("1984", "George Orwell", "PDF")
+livro3 = Livro("O Pequeno Príncipe", "Antoine de Saint-Exupéry")
 
 # Criando a biblioteca
 biblioteca = Biblioteca()
 
 # Adicionando livros
-biblioteca.adicionar_livro(meuLivro)
 biblioteca.adicionar_livro(livro1)
 biblioteca.adicionar_livro(livro2)
+biblioteca.adicionar_livro(livro3)
 
-# Listando livros
-biblioteca.listar_livros()
-
-# Removendo um livro
-biblioteca.remover_livro("O Hobbit")
-
-# Usando print(biblioteca)
-print("\nExibindo biblioteca com print(biblioteca):")
+# Usando print(biblioteca) para listar tudo
+print("\nExibindo biblioteca:")
 print(biblioteca)
